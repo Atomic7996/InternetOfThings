@@ -115,96 +115,96 @@ class RobotVacuum(Robot):
 class TrafficLight(Device):
     def __init__(self, name):
         super().__init__(name)
-        self.blue_lamp = 0  # 0 - выключена, 1 - включена
-        self.red_lamp = 0  # 0 - выключена, 1 - включена
-        self.yellow_lamp = 0  # 0 - выключена, 1 - включена
-        self.green_lamp = 0  # 0 - выключена, 1 - включена
+        self.blueLamp = 0  # 0 - выключена, 1 - включена
+        self.redLamp = 0  # 0 - выключена, 1 - включена
+        self.yellowLamp = 0  # 0 - выключена, 1 - включена
+        self.greenLamp = 0  # 0 - выключена, 1 - включена
 
         print(f"Traffic lights created")
 
     def connect(self, source):
         return super().connect(source)
 
-    def set_blue_lamp(self, state):
+    def setBlueLamp(self, state):
 
         if state in (0, 1):
-            self.blue_lamp = state
-            print(f"Blue lamp: {'on' if self.blue_lamp else 'off'}")
+            self.blueLamp = state
+            print(f"Blue lamp: {'on' if self.blueLamp else 'off'}")
         else:
             print("Error: Unavailable status.")
 
-    def set_red_lamp(self, state):
+    def setRedLamp(self, state):
 
         if state in (0, 1):
-            self.red_lamp = state
-            print(f"Red lamp: {'On' if self.red_lamp else 'Off'}")
+            self.redLamp = state
+            print(f"Red lamp: {'On' if self.redLamp else 'Off'}")
         else:
             print("Error: Unavailable status.")
 
-    def set_yellow_lamp(self, state):
+    def setYellowLamp(self, state):
 
         if state in (0, 1):
-            self.yellow_lamp = state
-            print(f"Yellow lamp: {'On' if self.yellow_lamp else 'Off'}")
+            self.yellowLamp = state
+            print(f"Yellow lamp: {'On' if self.yellowLamp else 'Off'}")
         else:
             print("Error: Unavailable status.")
 
-    def set_green_lamp(self, state):
+    def setGreenLamp(self, state):
 
         if state in (0, 1):
-            self.green_lamp = state
-            print(f"Green lamp: {'On' if self.green_lamp else 'Off'}")
+            self.greenLamp = state
+            print(f"Green lamp: {'On' if self.greenLamp else 'Off'}")
         else:
             print("Error: Unavailable status.")
 
-    def get_lamp_states(self):
+    def getLampStates(self):
 
         print(f"Lamp status '{self.name}':")
-        print(f"  Blue:  {'On' if self.blue_lamp else 'Off'}")
-        print(f"  Red: {'On' if self.red_lamp else 'Off'}")
-        print(f"  Yellow: {'On' if self.yellow_lamp else 'Off'}")
-        print(f"  Green: {'On' if self.green_lamp else 'Off'}")
+        print(f"  Blue:  {'On' if self.blueLamp else 'Off'}")
+        print(f"  Red: {'On' if self.redLamp else 'Off'}")
+        print(f"  Yellow: {'On' if self.yellowLamp else 'Off'}")
+        print(f"  Green: {'On' if self.greenLamp else 'Off'}")
 
 # Добавить считыватель штрих-кодов (камера)
 
 class BarcodeScanner(Device):
     def __init__(self, name):
         super().__init__(name)
-        self.last_code = None  # Последний считанный код
-        self.is_scanning = False # Флаг, показывающий, сканирует ли сканер в данный момент
+        self.lastCode = None  # Последний считанный код
+        self.isScanning = False # Флаг, показывающий, сканирует ли сканер в данный момент
 
         print(f"Barcode scanner created")
 
     def connect(self, source):
         return super().connect(source)
 
-    def start_scanning(self):
+    def startScanning(self):
 
-        self.is_scanning = True
+        self.isScanning = True
         print(f"Scanner started scanning")
 
-    def stop_scanning(self):
+    def stopScanning(self):
 
-        self.is_scanning = False
+        self.isScanning = False
         print(f"Scanner ended scanning")
 
-    def read_barcode(self):
+    def readBarcode(self):
 
-        if self.is_scanning:
+        if self.isScanning:
             # Генерируем случайный штрих-код в качестве примера.
             # В реальной системе здесь будет считывание из камеры.
-            self.last_code = "123456789012"
+            self.lastCode = "123456789012"
             print(f"The barcode has been read")
-            return self.last_code
+            return self.lastCode
         else:
             print("The scan is not active")
             return None
 
-    def get_last_code(self):
+    def getLastCode(self):
 
-        return self.last_code #Возвращает последний считанный код
+        return self.lastCode #Возвращает последний считанный код
 
-    def set_scanning_mode(self, mode):
+    def setScanningMode(self, mode):
 
         # В этом примере просто выводим сообщение.
         print(f"The scanning mode is: {mode}")
@@ -216,14 +216,14 @@ class ControlPanel(Device):
 
     def __init__(self, name):
         super().__init__(name)
-        self.switch_mode = 0  # Режим переключателя (параметр p)
-        self.button1_count = 0  # Количество нажатий кнопки 1 (параметр b1)
-        self.button2_code = 0  # Код кнопки 2 (параметр b2)
-        self.button3_code = 0  # Код кнопки 3 (параметр b3)
-        self.blue_lamp_state = 0  # Состояние синей лампы (параметр L1)
-        self.red_lamp_state = 0  # Состояние красной лампы (параметр L2)
-        self.yellow_lamp_state = 0  # Состояние желтой лампы (параметр L3)
-        self.green_lamp_state = 0  # Состояние зеленой лампы (параметр L4)
+        self.switchMode = 0  # Режим переключателя (параметр p)
+        self.button1Count = 0  # Количество нажатий кнопки 1 (параметр b1)
+        self.button2Code = 0  # Код кнопки 2 (параметр b2)
+        self.button3Code = 0  # Код кнопки 3 (параметр b3)
+        self.blueLampState = 0  # Состояние синей лампы (параметр L1)
+        self.redLampState = 0  # Состояние красной лампы (параметр L2)
+        self.yellowLampState = 0  # Состояние желтой лампы (параметр L3)
+        self.greenLampState = 0  # Состояние зеленой лампы (параметр L4)
 
         print(f"Control panel created")
 
@@ -231,68 +231,68 @@ class ControlPanel(Device):
         return super().connect(source)
 
     # Методы для управления лампами (параметры L1-L4)
-    def set_blue_lamp(self, state):
+    def setBlueLamp(self, state):
 
         if state in (0, 1):
-            self.blue_lamp_state = state
-            print(f"Blue lamp: {'on' if self.blue_lamp_state else 'off'}")
+            self.blueLampState = state
+            print(f"Blue lamp: {'on' if self.blueLampState else 'off'}")
         else:
             print("Error: Invalid lamp state. Use 0 or 1.")
 
-    def set_red_lamp(self, state):
+    def setRedLamp(self, state):
 
         if state in (0, 1):
-            self.red_lamp_state = state
-            print(f"Red lamp: {'on' if self.red_lamp_state else 'off'}")
+            self.redLampState = state
+            print(f"Red lamp: {'on' if self.redLampState else 'off'}")
         else:
             print("Error: Invalid lamp state. Use 0 or 1.")
 
-    def set_yellow_lamp(self, state):
+    def setYellowLamp(self, state):
 
         if state in (0, 1):
-            self.yellow_lamp_state = state
-            print(f"Yellow lamp: {'on' if self.yellow_lamp_state else 'off'}")
+            self.yellowLampState = state
+            print(f"Yellow lamp: {'on' if self.yellowLampState else 'off'}")
         else:
             print("Error: Invalid lamp state. Use 0 or 1.")
 
-    def set_green_lamp(self, state):
+    def setGreenLamp(self, state):
 
         if state in (0, 1):
-            self.green_lamp_state = state
-            print(f"Green lamp: {'on' if self.green_lamp_state else 'off'}")
+            self.greenLampState = state
+            print(f"Green lamp: {'on' if self.greenLampState else 'off'}")
         else:
             print("Error: Invalid lamp state. Use 0 or 1.")
 
     # Methods for monitoring (parameters p, b1-b3)
-    def set_switch_mode(self, mode):
+    def setSwitchMode(self, mode):
 
-        self.switch_mode = mode
-        print(f"Switch mode set: {self.switch_mode}")
+        self.switchMode = mode
+        print(f"Switch mode set: {self.switchMode}")
 
-    def increment_button1_count(self):
+    def incrementButton1Count(self):
 
-        self.button1_count += 1
-        print(f"Button 1 pressed. Number of presses: {self.button1_count}")
+        self.button1Count += 1
+        print(f"Button 1 pressed. Number of presses: {self.button1Count}")
 
-    def set_button2_code(self, code):
+    def setButton2Code(self, code):
 
-        self.button2_code = code
-        print(f"Button 2 code set: {self.button2_code}")
+        self.button2Code = code
+        print(f"Button 2 code set: {self.button2Code}")
 
-    def set_button3_code(self, code):
+    def setButton3Code(self, code):
 
-        self.button3_code = code
-        print(f"Button 3 code set: {self.button3_code}")
+        self.button3Code = code
+        print(f"Button 3 code set: {self.button3Code}")
 
     # Methods for getting the current state of parameters
-    def get_all_states(self):
+    def getAllStates(self):
 
         print(f"Control panel state '{self.name}':")
-        print(f"  Switch mode: {self.switch_mode}")
-        print(f"  Button 1 (number of presses): {self.button1_count}")
-        print(f"  Button 2 code: {self.button2_code}")
-        print(f"  Button 3 code: {self.button3_code}")
-        print(f"  Blue lamp: {'on' if self.blue_lamp_state else 'off'}")
-        print(f"  Red lamp: {'on' if self.red_lamp_state else 'off'}")
-        print(f"  Yellow lamp: {'on' if self.yellow_lamp_state else 'off'}")
-        print(f"  Green lamp: {'on' if self.green_lamp_state else 'off'}")
+        print(f"  Switch mode: {self.switchMode}")
+        print(f"  Button 1 (number of presses): {self.button1Count}")
+        print(f"  Button 2 code: {self.button2Code}")
+        print(f"  Button 3 code: {self.button3Code}")
+        print(f"  Blue lamp: {'on' if self.blueLampState else 'off'}")
+        print(f"  Red lamp: {'on' if self.redLampState else 'off'}")
+        print(f"  Yellow lamp: {'on' if self.yellowLampState else 'off'}")
+        print(f"  Green lamp: {'on' if self.greenLampState else 'off'}")
