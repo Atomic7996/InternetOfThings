@@ -53,6 +53,8 @@ def testTrafficLight():
 
     trafficLight1.get_lamp_states()
 
+    return testString
+
 def testBarcodeScanner():
 
     testString = "Barcode Scanner test:<br>"

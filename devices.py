@@ -112,7 +112,7 @@ class RobotVacuum(Robot):
         print(f"{self.name} vacuum grab mode changed to {self.vacuumGrabMode}")
 
 # Добавить лампу (светофор)
-class TrafficLight():
+class TrafficLight(Device):
     def __init__(self, name):
         super().__init__(name)
         self.blue_lamp = 0  # 0 - выключена, 1 - включена
