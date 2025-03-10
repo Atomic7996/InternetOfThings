@@ -111,7 +111,7 @@ class RobotVacuum(Robot):
         self.vacuumGrabMode = mode
         print(f"{self.name} vacuum grab mode changed to {self.vacuumGrabMode}")
 
-# Добавить лампу (светофор)
+
 class TrafficLight(Device):
     def __init__(self, name):
         super().__init__(name)
@@ -120,7 +120,7 @@ class TrafficLight(Device):
         self.yellowLamp = 0  # 0 - выключена, 1 - включена
         self.greenLamp = 0  # 0 - выключена, 1 - включена
 
-        print(f"Traffic lights created")
+        print(f"Traffic light created")
 
     def connect(self, source):
         return super().connect(source)
@@ -165,7 +165,6 @@ class TrafficLight(Device):
         print(f"  Yellow: {'On' if self.yellowLamp else 'Off'}")
         print(f"  Green: {'On' if self.greenLamp else 'Off'}")
 
-# Добавить считыватель штрих-кодов (камера)
 
 class BarcodeScanner(Device):
     def __init__(self, name):
@@ -209,8 +208,6 @@ class BarcodeScanner(Device):
         # В этом примере просто выводим сообщение.
         print(f"The scanning mode is: {mode}")
 
-
-# добавить пульт управления (терминал)
 
 class ControlPanel(Device):
 

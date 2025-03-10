@@ -2,14 +2,16 @@ from flask import Flask
 import devices as devices
 import time
 
+
 app = Flask(__name__)
 
 robotVacuum = devices.RobotVacuum("VacuumRobot1")
 robotMech = devices.RobotMech("MechRobot1")
 tempSensor1 = devices.Sensor("Temp1", "Temperature", "C")
-trafficLight1 = devices.TrafficLight("TrafficLight1")
-barcodeScanner1 = devices.BarcodeScanner("Scanner1")
-controlPanel1 = devices.ControlPanel("Panel1")
+
+trafficLight = devices.TrafficLight("Traffic light")
+barcodeScanner = devices.BarcodeScanner("Scanner")
+controlPanel = devices.ControlPanel("Control panel")
 
 
 def testRobots():
@@ -35,93 +37,87 @@ def testRobots():
     return conectionString
 
 
-# Добавить методы с тестом лампы, камеры и терминала
 def testTrafficLight():
     testString = "Traffic Light test:<br>"
-    testString += trafficLight1.connect("MainController") + "<br>"
+    testString += trafficLight.connect("MainController") + "<br>"
 
-    trafficLight1.setRedLamp(1)
-    trafficLight1.setYellowLamp(1)
-    trafficLight1.setGreenLamp(0)
-    trafficLight1.setBlueLamp(0)  # Устанавливаем состояние синей лампы
+    trafficLight.setRedLamp(1)
+    trafficLight.setYellowLamp(1)
+    trafficLight.setGreenLamp(0)
+    trafficLight.setBlueLamp(0)  # Устанавливаем состояние синей лампы
 
     testString += "Traffic Light states:<br>"
-    testString += f"Red: {trafficLight1.redLamp}<br>"
-    testString += f"Yellow: {trafficLight1.yellowLamp}<br>"
-    testString += f"Green: {trafficLight1.greenLamp}<br>"
-    testString += f"Blue: {trafficLight1.blueLamp}<br>"  # Добавляем состояние синей лампы
+    testString += f"Red: {trafficLight.redLamp}<br>"
+    testString += f"Yellow: {trafficLight.yellowLamp}<br>"
+    testString += f"Green: {trafficLight.greenLamp}<br>"
+    testString += f"Blue: {trafficLight.blueLamp}<br>"  # Добавляем состояние синей лампы
 
-    trafficLight1.getLampStates()
+    trafficLight.getLampStates()
 
     return testString
 
 def testBarcodeScanner():
 
     testString = "Barcode Scanner test:<br>"
-    testString += barcodeScanner1.connect("AssemblyLine") + "<br>"
+    testString += barcodeScanner.connect("AssemblyLine") + "<br>"
 
-    barcodeScanner1.startScanning()
+    barcodeScanner.startScanning()
     testString += "Scanning started...<br>"
 
     # Имитируем непрерывное сканирование с заданной периодичностью
     for i in range(3):
-        code = barcodeScanner1.readBarcode()
+        code = barcodeScanner.readBarcode()
         if code:
             testString += f"Code read: {code}<br>"
-            testString += f"Last Code (Monitoring Parameter): {barcodeScanner1.lastCode}<br>"  # Выводим последний штрих-код
+            testString += f"Last Code (Monitoring Parameter): {barcodeScanner.lastCode}<br>"  # Выводим последний штрих-код
         else:
             testString += "No code read.<br>"
         time.sleep(1)  # Пауза в 1 секунду (имитация периодичности)
 
-    barcodeScanner1.stopScanning()
+    barcodeScanner.stopScanning()
     testString += "Scanning stopped.<br>"
 
-    testString += f"Final Last Code: {barcodeScanner1.getLastCode()}<br>"  # Проверяем последний штрих-код после остановки
+    testString += f"Final Last Code: {barcodeScanner.getLastCode()}<br>"  # Проверяем последний штрих-код после остановки
 
     return testString
 
 def testControlPanel():
 
     testString = "Control Panel test:<br>"
-    testString += controlPanel1.connect("ProductionLine") + "<br>"
+    testString += controlPanel.connect("ProductionLine") + "<br>"
 
     # Устанавливаем значения параметров для мониторинга
-    controlPanel1.setSwitchMode(2)
-    controlPanel1.incrementButton1Count()
-    controlPanel1.setButton2Code(789)
-    controlPanel1.setButton3Code(987)
+    controlPanel.setSwitchMode(2)
+    controlPanel.incrementButton1Count()
+    controlPanel.setButton2Code(789)
+    controlPanel.setButton3Code(987)
 
     # Устанавливаем значения параметров для управления (лампы)
-    controlPanel1.setBlueLamp(0)
-    controlPanel1.setRedLamp(1)
-    controlPanel1.setYellowLamp(0)
-    controlPanel1.setGreenLamp(1)
+    controlPanel.setBlueLamp(0)
+    controlPanel.setRedLamp(1)
+    controlPanel.setYellowLamp(0)
+    controlPanel.setGreenLamp(1)
 
     # Выводим состояния параметров в HTML
     testString += "Control Panel states:<br>"
-    testString += f"Switch Mode (p): {controlPanel1.switchMode}<br>"
-    testString += f"Button 1 Count (b1): {controlPanel1.button1Count}<br>"
-    testString += f"Button 2 Code (b2): {controlPanel1.button2Code}<br>"
-    testString += f"Button 3 Code (b3): {controlPanel1.button3Code}<br>"
-    testString += f"Blue Lamp (L1): {'On' if controlPanel1.blueLampState else 'Off'}<br>"
-    testString += f"Red Lamp (L2): {'On' if controlPanel1.redLampState else 'Off'}<br>"
-    testString += f"Yellow Lamp (L3): {'On' if controlPanel1.yellowLampState else 'Off'}<br>"
-    testString += f"Green Lamp (L4): {'On' if controlPanel1.greenLampState else 'Off'}<br>"
+    testString += f"Switch Mode (p): {controlPanel.switchMode}<br>"
+    testString += f"Button 1 Count (b1): {controlPanel.button1Count}<br>"
+    testString += f"Button 2 Code (b2): {controlPanel.button2Code}<br>"
+    testString += f"Button 3 Code (b3): {controlPanel.button3Code}<br>"
+    testString += f"Blue Lamp (L1): {'On' if controlPanel.blueLampState else 'Off'}<br>"
+    testString += f"Red Lamp (L2): {'On' if controlPanel.redLampState else 'Off'}<br>"
+    testString += f"Yellow Lamp (L3): {'On' if controlPanel.yellowLampState else 'Off'}<br>"
+    testString += f"Green Lamp (L4): {'On' if controlPanel.greenLampState else 'Off'}<br>"
 
-    controlPanel1.getAllStates() #Выводим состояния в консоль
+    controlPanel.getAllStates() #Выводим состояния в консоль
 
     return testString
 
 
 @app.route("/")
 def startApp():
-    return (testRobotsString + "<br><br>" + testTrafficLightString + "<br><br>" + testBarcodeScanner() + "<br><br>"
-        + testControlPanel())
+    return f"{testRobots()} <br><br> {testTrafficLight()} <br><br> {testBarcodeScanner()} <br><br> {testControlPanel()}"
 
 
 if __name__ == "__main__":
-    testRobotsString = testRobots()
-    testTrafficLightString = testTrafficLight()
-    testBarcodeScannerString = testBarcodeScanner()
-    testControlPanelString = testControlPanel()
     app.run()
