@@ -1,4 +1,6 @@
 import abc
+import json
+import random
 
 
 class Device(abc.ABC):
@@ -6,22 +8,8 @@ class Device(abc.ABC):
         self.name = name
 
     @abc.abstractmethod
-    def connect(self, source):
-        return f"{self.name} is connected to {source}"
-
-
-class Sensor(Device):
-    def __init__(self, name, param, unit):
-        super().__init__(name)
-        self.parameter = param
-        self.unit = unit
-        self.value = 0
-
-    def connect(self, source):
-        return super().connect(source)
-
-    def getData(self):
-        print(f"{self.parameter}: {self.value} {self.unit}")
+    def connect(self):
+        pass
 
 
 class Robot(Device):
@@ -39,64 +27,100 @@ class Robot(Device):
         self.commandCounter = 0
 
         # Sensors
+        self.t1 = 0
+        self.t2 = 0
+        self.t3 = 0
+        self.t4 = 0
+        self.t5 = 0
+        self.t6 = 0
+        self.m1 = 0
+        self.m2 = 0
+        self.m3 = 0
+        self.m4 = 0
+        self.m5 = 0
+        self.m6 = 0
+        self.l1 = 0
+        self.l2 = 0
+        self.l3 = 0
+        self.l4 = 0
+        self.l5 = 0
+        self.l6 = 0
+
+    @abc.abstractmethod
+    def connect(self, *args):
+        self.emulate()
 
 
+    def emulate(self):
+        self.t1 = random.randint(15, 115)
+        self.t2 = random.randint(15, 115)
+        self.t3 = random.randint(15, 115)
+        self.t4 = random.randint(15, 115)
+        self.t5 = random.randint(15, 115)
+        self.t6 = random.randint(15, 115)
+        self.m1 = random.randint(15, 115)
+        self.m2 = random.randint(15, 115)
+        self.m3 = random.randint(15, 115)
+        self.m4 = random.randint(15, 115)
+        self.m5 = random.randint(15, 115)
+        self.m6 = random.randint(15, 115)
+        self.l1 = random.randint(15, 115)
+        self.l2 = random.randint(15, 115)
+        self.l3 = random.randint(15, 115)
+        self.l4 = random.randint(15, 115)
+        self.l5 = random.randint(15, 115)
+        self.l6 = random.randint(15, 115)
 
-    def connect(self, source):
-        return super().connect(source)
-
-    def enterCommand(self, commandNumber):
-        self.commandNumber = commandNumber
-
-        self.processCommand(self.commandNumber)
-
-    def enterCoords(self, coordX, coordY):
-        self.coordX = coordX
-        self.coordY = coordY
-        print(f"{self.name} coordinates changed X: {self.coordX}, Y: {self.coordY}")
-
-    def getLastCommand(self):
-        print(f"{self.name} last command was: {self.lastCommandNumber}")
-
-    def getStatus(self):
-        print(f"{self.name} status is : {self.status}")
-
-    def getProcessedCommandsCount(self):
-        print(f"{self.name} processed {self.commandCounter} commands")
-
-    def getCoordinates(self):
-        print(f"{self.name} coordinates X: {self.coordX}, Y: {self.coordY}")
-
-    def processCommand(self, command):
-        print(f"\n{self.name} is processing command:")
+        self.lastCommandNumber = 3
         self.status = 1
-        self.getStatus()
-
-        print(f"Processing command {self.commandNumber}")
-
-        self.lastCommandNumber = self.commandNumber
-        self.commandCounter += 1
-        self.status = 0
-
-        self.getStatus()
+        self.commandCounter = 3
 
 
-class RobotMech(Robot):
+class RobotGripper(Robot):
     def __init__(self, name):
         super().__init__(name)
 
+        self.motorMaximum = 4096
         self.instrumentAngle = 0
         self.grabLevel = 0
 
-        print("Robot with mechanical created")
+        print("Robot with gripper created")
 
-    def setInstrumentAngle(self, angle):
-        self.instrumentAngle = angle
-        print(f"{self.name} instrument angle changed to {self.instrumentAngle}")
+    def connect(self):
+        super().connect()
 
-    def setGrabLevel(self, level):
-        self.grabLevel = level
-        print(f"{self.name} grab level changed to {self.grabLevel}")
+        return json.dumps({
+            't1': self.t1,
+            't2': self.t2,
+            't3': self.t3,
+            't4': self.t4,
+            't5': self.t5,
+            't6': self.t6,
+            'm1': self.m1,
+            'm2': self.m2,
+            'm3': self.m3,
+            'm4': self.m4,
+            'm5': self.m5,
+            'm6': self.m6,
+            'l1': self.l1,
+            'l2': self.l2,
+            'l3': self.l3,
+            'l4': self.l4,
+            'l5': self.l5,
+            'l6': self.l6,
+            'lastCommandNumber': self.lastCommandNumber,
+            'status': self.status,
+            'commandCounter': self.commandCounter,
+        })
+
+        # Management
+        # return json.dumps({
+        #     'commandNumber': self.commandNumber,
+        #     'coordX': self.coordX,
+        #     'coordY': self.coordY,
+        #     'instrumentAngle': self.instrumentAngle,
+        #     'grabLevel': self.grabLevel
+        # })
 
 
 class RobotVacuum(Robot):
@@ -107,9 +131,40 @@ class RobotVacuum(Robot):
 
         print(f"Robot with vacuum created")
 
-    def setVacuumGrabMode(self, mode):
-        self.vacuumGrabMode = mode
-        print(f"{self.name} vacuum grab mode changed to {self.vacuumGrabMode}")
+    def connect(self):
+       super().connect()
+       self.status = 0
+
+       return json.dumps({
+           't1': self.t1,
+           't2': self.t2,
+           't3': self.t3,
+           't4': self.t4,
+           't5': self.t5,
+           't6': self.t6,
+           'm1': self.m1,
+           'm2': self.m2,
+           'm3': self.m3,
+           'm4': self.m4,
+           'm5': self.m5,
+           'm6': self.m6,
+           'l1': self.l1,
+           'l2': self.l2,
+           'l3': self.l3,
+           'l4': self.l4,
+           'l5': self.l5,
+           'l6': self.l6,
+           'lastCommandNumber': self.lastCommandNumber,
+           'status': self.status,
+           'commandCounter': self.commandCounter,
+       })
+       # Management
+       # return json.dumps({
+       #     'commandNumber': self.commandNumber,
+       #     'coordX': self.coordX,
+       #     'coordY': self.coordY,
+       #     'vacuumGrabMode': self.vacuumGrabMode,
+       # })
 
 
 class TrafficLight(Device):
@@ -122,8 +177,8 @@ class TrafficLight(Device):
 
         print(f"Traffic light created")
 
-    def connect(self, source):
-        return super().connect(source)
+    def connect(self,):
+        return super().connect()
 
     def setBlueLamp(self, state):
 
@@ -174,8 +229,8 @@ class BarcodeScanner(Device):
 
         print(f"Barcode scanner created")
 
-    def connect(self, source):
-        return super().connect(source)
+    def connect(self):
+        return super().connect()
 
     def startScanning(self):
 
@@ -224,8 +279,8 @@ class ControlPanel(Device):
 
         print(f"Control panel created")
 
-    def connect(self, source):
-        return super().connect(source)
+    def connect(self):
+        return super().connect()
 
     # Методы для управления лампами (параметры L1-L4)
     def setBlueLamp(self, state):
