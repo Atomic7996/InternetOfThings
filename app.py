@@ -20,11 +20,22 @@ def robotGripperConnect():
 def robotVacuumConnect():
     return robotVacuum.connect()
 
+# Пример на Flask
+@app.route('/connect/trafficlight')
+def connect_trafficlight():
+    return TrafficLight("tl1").connect()
+
+@app.route('/connect/scanner')
+def connect_scanner():
+    return BarcodeScanner("bs1").connect()
+
+@app.route('/connect/panel')
+def connect_panel():
+    return ControlPanel("cp1").connect()
 
 @app.route("/")
 def startApp():
     return render_template('index.html')
-
 
 if __name__ == "__main__":
     app.run()

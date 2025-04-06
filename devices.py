@@ -170,181 +170,66 @@ class RobotVacuum(Robot):
 class TrafficLight(Device):
     def __init__(self, name):
         super().__init__(name)
-        self.blueLamp = 0  # 0 - выключена, 1 - включена
-        self.redLamp = 0  # 0 - выключена, 1 - включена
-        self.yellowLamp = 0  # 0 - выключена, 1 - включена
-        self.greenLamp = 0  # 0 - выключена, 1 - включена
+        self.blueLamp = 0
+        self.redLamp = 0
+        self.yellowLamp = 0
+        self.greenLamp = 0
 
-        print(f"Traffic light created")
+    def emulate(self):
+        self.blueLamp = random.randint(0, 1)
+        self.redLamp = random.randint(0, 1)
+        self.yellowLamp = random.randint(0, 1)
+        self.greenLamp = random.randint(0, 1)
 
-    def connect(self,):
-        return super().connect()
-
-    def setBlueLamp(self, state):
-
-        if state in (0, 1):
-            self.blueLamp = state
-            print(f"Blue lamp: {'on' if self.blueLamp else 'off'}")
-        else:
-            print("Error: Unavailable status.")
-
-    def setRedLamp(self, state):
-
-        if state in (0, 1):
-            self.redLamp = state
-            print(f"Red lamp: {'On' if self.redLamp else 'Off'}")
-        else:
-            print("Error: Unavailable status.")
-
-    def setYellowLamp(self, state):
-
-        if state in (0, 1):
-            self.yellowLamp = state
-            print(f"Yellow lamp: {'On' if self.yellowLamp else 'Off'}")
-        else:
-            print("Error: Unavailable status.")
-
-    def setGreenLamp(self, state):
-
-        if state in (0, 1):
-            self.greenLamp = state
-            print(f"Green lamp: {'On' if self.greenLamp else 'Off'}")
-        else:
-            print("Error: Unavailable status.")
-
-    def getLampStates(self):
-
-        print(f"Lamp status '{self.name}':")
-        print(f"  Blue:  {'On' if self.blueLamp else 'Off'}")
-        print(f"  Red: {'On' if self.redLamp else 'Off'}")
-        print(f"  Yellow: {'On' if self.yellowLamp else 'Off'}")
-        print(f"  Green: {'On' if self.greenLamp else 'Off'}")
-
+    def connect(self):
+        self.emulate()
+        return json.dumps({
+            'blueLamp': self.blueLamp,
+            'redLamp': self.redLamp,
+            'yellowLamp': self.yellowLamp,
+            'greenLamp': self.greenLamp
+        })
 
 class BarcodeScanner(Device):
     def __init__(self, name):
         super().__init__(name)
-        self.lastCode = None  # Последний считанный код
-        self.isScanning = False # Флаг, показывающий, сканирует ли сканер в данный момент
+        self.lastCode = None
+        self.isScanning = False
 
-        print(f"Barcode scanner created")
+    def emulate(self):
+        self.lastCode = str(random.randint(10**11, 10**12-1))
+        self.isScanning = random.choice([True, False])
 
     def connect(self):
-        return super().connect()
-
-    def startScanning(self):
-
-        self.isScanning = True
-        print(f"Scanner started scanning")
-
-    def stopScanning(self):
-
-        self.isScanning = False
-        print(f"Scanner ended scanning")
-
-    def readBarcode(self):
-
-        if self.isScanning:
-            # Генерируем случайный штрих-код в качестве примера.
-            # В реальной системе здесь будет считывание из камеры.
-            self.lastCode = "123456789012"
-            print(f"The barcode has been read")
-            return self.lastCode
-        else:
-            print("The scan is not active")
-            return None
-
-    def getLastCode(self):
-
-        return self.lastCode #Возвращает последний считанный код
-
-    def setScanningMode(self, mode):
-
-        # В этом примере просто выводим сообщение.
-        print(f"The scanning mode is: {mode}")
+        self.emulate()
+        return json.dumps({
+            'lastCode': self.lastCode,
+            'isScanning': self.isScanning
+        })
 
 
 class ControlPanel(Device):
-
     def __init__(self, name):
         super().__init__(name)
-        self.switchMode = 0  # Режим переключателя (параметр p)
-        self.button1Count = 0  # Количество нажатий кнопки 1 (параметр b1)
-        self.button2Code = 0  # Код кнопки 2 (параметр b2)
-        self.button3Code = 0  # Код кнопки 3 (параметр b3)
-        self.blueLampState = 0  # Состояние синей лампы (параметр L1)
-        self.redLampState = 0  # Состояние красной лампы (параметр L2)
-        self.yellowLampState = 0  # Состояние желтой лампы (параметр L3)
-        self.greenLampState = 0  # Состояние зеленой лампы (параметр L4)
+        self.switchMode = 0
+        self.button1Count = 0
+        self.button2Code = 0
+        self.button3Code = 0
+        self.lampStates = [0]*4
 
-        print(f"Control panel created")
+    def emulate(self):
+        self.switchMode = random.randint(0, 3)
+        self.button1Count = random.randint(0, 100)
+        self.button2Code = random.randint(1000, 9999)
+        self.button3Code = random.randint(1000, 9999)
+        self.lampStates = [random.randint(0,1) for _ in range(4)]
 
     def connect(self):
-        return super().connect()
-
-    # Методы для управления лампами (параметры L1-L4)
-    def setBlueLamp(self, state):
-
-        if state in (0, 1):
-            self.blueLampState = state
-            print(f"Blue lamp: {'on' if self.blueLampState else 'off'}")
-        else:
-            print("Error: Invalid lamp state. Use 0 or 1.")
-
-    def setRedLamp(self, state):
-
-        if state in (0, 1):
-            self.redLampState = state
-            print(f"Red lamp: {'on' if self.redLampState else 'off'}")
-        else:
-            print("Error: Invalid lamp state. Use 0 or 1.")
-
-    def setYellowLamp(self, state):
-
-        if state in (0, 1):
-            self.yellowLampState = state
-            print(f"Yellow lamp: {'on' if self.yellowLampState else 'off'}")
-        else:
-            print("Error: Invalid lamp state. Use 0 or 1.")
-
-    def setGreenLamp(self, state):
-
-        if state in (0, 1):
-            self.greenLampState = state
-            print(f"Green lamp: {'on' if self.greenLampState else 'off'}")
-        else:
-            print("Error: Invalid lamp state. Use 0 or 1.")
-
-    # Methods for monitoring (parameters p, b1-b3)
-    def setSwitchMode(self, mode):
-
-        self.switchMode = mode
-        print(f"Switch mode set: {self.switchMode}")
-
-    def incrementButton1Count(self):
-
-        self.button1Count += 1
-        print(f"Button 1 pressed. Number of presses: {self.button1Count}")
-
-    def setButton2Code(self, code):
-
-        self.button2Code = code
-        print(f"Button 2 code set: {self.button2Code}")
-
-    def setButton3Code(self, code):
-
-        self.button3Code = code
-        print(f"Button 3 code set: {self.button3Code}")
-
-    # Methods for getting the current state of parameters
-    def getAllStates(self):
-
-        print(f"Control panel state '{self.name}':")
-        print(f"  Switch mode: {self.switchMode}")
-        print(f"  Button 1 (number of presses): {self.button1Count}")
-        print(f"  Button 2 code: {self.button2Code}")
-        print(f"  Button 3 code: {self.button3Code}")
-        print(f"  Blue lamp: {'on' if self.blueLampState else 'off'}")
-        print(f"  Red lamp: {'on' if self.redLampState else 'off'}")
-        print(f"  Yellow lamp: {'on' if self.yellowLampState else 'off'}")
-        print(f"  Green lamp: {'on' if self.greenLampState else 'off'}")
+        self.emulate()
+        return json.dumps({
+            'switchMode': self.switchMode,
+            'button1Count': self.button1Count,
+            'button2Code': self.button2Code,
+            'button3Code': self.button3Code,
+            'lamps': self.lampStates
+        })
