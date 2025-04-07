@@ -1,6 +1,6 @@
 setInterval(get_data_robot_gripper, 1000)
 setInterval(get_data_robot_vacuum, 1000)
-setInterval(connect_traffic_lights, 1000)
+setInterval(get_data_traffic_lights, 1000)
 setInterval(get_data_barcode_scanner, 1000)
 setInterval(get_data_control_panel, 1000)
 
@@ -70,8 +70,7 @@ function get_data_robot_vacuum() {
     });
 }
 
-
-function connect_traffic_lights() {
+function get_data_traffic_lights() {
     $.ajax({
         type: 'GET',
         url: '/connect_trafficlight',
@@ -117,7 +116,7 @@ function get_data_barcode_scanner() {
         data: {},
         success: function (response) {
             document.getElementById("lastCode_4").value = response["lastCode"]
-            document.getElementById("scanStatus_4").value = response["isScanning"] ? "1" : "0"
+            document.getElementById("scanStatus_4").value = response["isScanning"]
         }
     });
 }
