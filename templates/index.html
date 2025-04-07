@@ -305,20 +305,69 @@
         </div>
     </div>
 
-    <div class="thing" id="lights_camera">
-
-    </div>
-
     <br>
 
     <div class="thing" id="barcode_scanner">
         <h1 style="text-align:center">Barcode scanner</h1>
+        <div class="sensors">
+            <div class="sensor">
+                <div class="input-box">
+                    <label>Last Code</label>
+                    <input type="text" id="lastCode_4" placeholder="Barcode" disabled="disabled">
+                </div>
+                <div class="input-box">
+                    <label>Status</label>
+                    <input type="text" id="scanStatus_4" placeholder="Scanning/Idle" disabled="disabled">
+                </div>
+            </div>
+        </div>
     </div>
 
     <br>
 
     <div class="thing" id="control_panel">
         <h1 style="text-align:center">Control panel</h1>
+        <div class="sensors">
+            <div class="sensor">
+                <div class="input-box">
+                    <label>Switch Mode</label>
+                    <input type="text" id="switchMode_5" placeholder="[0-3]" disabled="disabled">
+                </div>
+                <div class="input-box">
+                    <label>Button 1 Count</label>
+                    <input type="text" id="button1Count_5" placeholder="[0-100]" disabled="disabled">
+                </div>
+                <div class="input-box">
+                    <label>Button 2 Code</label>
+                    <input type="text" id="button2Code_5" placeholder="[1000-9999]" disabled="disabled">
+                </div>
+                <div class="input-box">
+                    <label>Button 3 Code</label>
+                    <input type="text" id="button3Code_5" placeholder="[1000-9999]" disabled="disabled">
+                </div>
+            </div>
+
+            <!-- Лампы панели управления -->
+            <div class="sensor">
+                <h3>Lamps State</h3>
+                <div class="input-box">
+                    <label>Lamp 1</label>
+                    <input type="text" id="lamp1_5" placeholder="[0/1]" disabled="disabled">
+                </div>
+                <div class="input-box">
+                    <label>Lamp 2</label>
+                    <input type="text" id="lamp2_5" placeholder="[0/1]" disabled="disabled">
+                </div>
+                <div class="input-box">
+                    <label>Lamp 3</label>
+                    <input type="text" id="lamp3_5" placeholder="[0/1]" disabled="disabled">
+                </div>
+                <div class="input-box">
+                    <label>Lamp 4</label>
+                    <input type="text" id="lamp4_5" placeholder="[0/1]" disabled="disabled">
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 

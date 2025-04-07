@@ -1,5 +1,8 @@
 setInterval(get_data_robot_gripper, 1000)
 setInterval(get_data_robot_vacuum, 1000)
+setInterval(connect_traffic_lights, 1000)
+setInterval(get_data_barcode_scanner, 1000)
+setInterval(get_data_control_panel, 1000)
 
 function get_data_robot_gripper() {
     $.ajax({
@@ -101,6 +104,41 @@ function connect_traffic_lights() {
             else {
                 document.getElementById("traffic_green").style.backgroundColor = 'black'
             }
+        }
+    });
+}
+
+function get_data_barcode_scanner() {
+    $.ajax({
+        type: 'GET',
+        url: '/connect/scanner',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: {},
+        success: function (response) {
+            document.getElementById("lastCode_4").value = response["lastCode"]
+            document.getElementById("scanStatus_4").value = response["isScanning"] ? "1" : "0"
+        }
+    });
+}
+
+// ПАНЕЛЬ УПРАВЛЕНИЯ (ID 5)
+function get_data_control_panel() {
+    $.ajax({
+        type: 'GET',
+        url: '/connect/panel',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: {},
+        success: function (response) {
+            document.getElementById("switchMode_5").value = response["switchMode"]
+            document.getElementById("button1Count_5").value = response["button1Count"]
+            document.getElementById("button2Code_5").value = response["button2Code"]
+            document.getElementById("button3Code_5").value = response["button3Code"]
+            document.getElementById("lamp1_5").value = response["lamps"][0]
+            document.getElementById("lamp2_5").value = response["lamps"][1]
+            document.getElementById("lamp3_5").value = response["lamps"][2]
+            document.getElementById("lamp4_5").value = response["lamps"][3]
         }
     });
 }
