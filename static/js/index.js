@@ -30,8 +30,8 @@ function get_data_robot_gripper() {
             document.getElementById("n_1").value = response["lastCommandNumber"]
             document.getElementById("s_1").value = response["status"]
             document.getElementById("c_1").value = response["commandCounter"]
-            }
-        });
+        }
+    });
 }
 
 function get_data_robot_vacuum() {
@@ -63,6 +63,44 @@ function get_data_robot_vacuum() {
             document.getElementById("n_2").value = response["lastCommandNumber"]
             document.getElementById("s_2").value = response["status"]
             document.getElementById("c_2").value = response["commandCounter"]
+        }
+    });
+}
+
+
+function connect_traffic_lights() {
+    $.ajax({
+        type: 'GET',
+        url: document.getElementById("URL_system").value + document.getElementById("traffic_lights_connect_URL").value,
+        dataType: 'json',
+        contentType: 'application/json',
+        data: {},
+
+        success: function (response) {
+            if (response['L1'] == 1) {
+                document.getElementById("traffic_blue").style.backgroundColor = 'blue'
             }
-        });
+            else {
+                document.getElementById("traffic_blue").style.backgroundColor = 'black'
+            }
+            if (response['L2'] == 1) {
+                document.getElementById("traffic_red").style.backgroundColor = 'red'
+            }
+            else {
+                document.getElementById("traffic_red").style.backgroundColor = 'black'
+            }
+            if (response['L3'] == 1) {
+                document.getElementById("traffic_yellow").style.backgroundColor = 'yellow'
+            }
+            else {
+                document.getElementById("traffic_yellow").style.backgroundColor = 'black'
+            }
+            if (response['L4'] == 1) {
+                document.getElementById("traffic_green").style.backgroundColor = 'green'
+            }
+            else {
+                document.getElementById("traffic_green").style.backgroundColor = 'black'
+            }
+        }
+    });
 }

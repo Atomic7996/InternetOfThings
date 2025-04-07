@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Sensor Emulator</title>
@@ -7,262 +8,318 @@
     <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="../static/js/index.js"></script>
 </head>
+
 <body>
-<div id="row_things" style="display: flex">
-    <div class="thing" id="robot_gripper">
-        <h1 style="text-align:center">Robot gripper</h1>
-        <div class="sensors">
-            <div class="sensor" id="temp">
-                <div class="input-box">
-                    <label>t1</label>
-                    <input type="text" id="t1_1" placeholder="C" disabled="disabled">
+    <div id="row_things" style="display: flex">
+        <div class="thing" id="robot_gripper">
+            <h1 style="text-align:center">Robot gripper</h1>
+            <div class="sensors">
+                <div class="sensor" id="temp">
+                    <div class="input-box">
+                        <label>t1</label>
+                        <input type="text" id="t1_1" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>t2</label>
+                        <input type="text" id="t2_1" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>t3</label>
+                        <input type="text" id="t3_1" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>t4</label>
+                        <input type="text" id="t4_1" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>t5</label>
+                        <input type="text" id="t5_1" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>t6</label>
+                        <input type="text" id="t6_1" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>n</label>
+                        <input type="text" id="n_1" placeholder="n" disabled="disabled">
+                    </div>
                 </div>
-                <div class="input-box">
-                    <label>t2</label>
-                    <input type="text" id="t2_1" placeholder="C" disabled="disabled">
+                <div class="sensor" id="load">
+                    <div class="input-box">
+                        <label>l1</label>
+                        <input type="text" id="l1_1" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>l2</label>
+                        <input type="text" id="l2_1" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>l3</label>
+                        <input type="text" id="l3_1" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>l4</label>
+                        <input type="text" id="l4_1" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>l5</label>
+                        <input type="text" id="l5_1" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>l6</label>
+                        <input type="text" id="l6_1" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>s</label>
+                        <input type="text" id="s_1" placeholder="s" disabled="disabled">
+                    </div>
                 </div>
-                <div class="input-box">
-                    <label>t3</label>
-                    <input type="text" id="t3_1" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>t4</label>
-                    <input type="text" id="t4_1" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>t5</label>
-                    <input type="text" id="t5_1" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>t6</label>
-                    <input type="text" id="t6_1" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>n</label>
-                    <input type="text" id="n_1" placeholder="n" disabled="disabled">
+                <div class="sensor" id="motor">
+                    <div class="input-box">
+                        <label>m1</label>
+                        <input type="text" id="m1_1" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>m2</label>
+                        <input type="text" id="m2_1" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>m3</label>
+                        <input type="text" id="m3_1" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>m4</label>
+                        <input type="text" id="m4_1" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>m5</label>
+                        <input type="text" id="m5_1" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>m6</label>
+                        <input type="text" id="m6_1" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>c</label>
+                        <input type="text" id="c_1" placeholder="c" disabled="disabled">
+                    </div>
                 </div>
             </div>
-            <div class="sensor" id="load">
+            <div class="control">
                 <div class="input-box">
-                    <label>l1</label>
-                    <input type="text" id="l1_1" placeholder="C" disabled="disabled">
+                    <label>N</label>
+                    <input type="text" id="N_control_1" placeholder="c">
                 </div>
                 <div class="input-box">
-                    <label>l2</label>
-                    <input type="text" id="l2_1" placeholder="C" disabled="disabled">
+                    <label>X</label>
+                    <input type="text" id="X_1" placeholder="X">
                 </div>
                 <div class="input-box">
-                    <label>l3</label>
-                    <input type="text" id="l3_1" placeholder="C" disabled="disabled">
+                    <label>Y</label>
+                    <input type="text" id="Y_1" placeholder="Y">
                 </div>
                 <div class="input-box">
-                    <label>l4</label>
-                    <input type="text" id="l4_1" placeholder="C" disabled="disabled">
+                    <label>T</label>
+                    <input type="text" id="T_1" placeholder="T">
                 </div>
                 <div class="input-box">
-                    <label>l5</label>
-                    <input type="text" id="l5_1" placeholder="C" disabled="disabled">
+                    <label>G</label>
+                    <input type="text" id="G_1" placeholder="G">
                 </div>
-                <div class="input-box">
-                    <label>l6</label>
-                    <input type="text" id="l6_1" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>s</label>
-                    <input type="text" id="s_1" placeholder="s" disabled="disabled">
-                </div>
-            </div>
-            <div class="sensor" id="motor">
-                <div class="input-box">
-                    <label>m1</label>
-                    <input type="text" id="m1_1" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>m2</label>
-                    <input type="text" id="m2_1" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>m3</label>
-                    <input type="text" id="m3_1" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>m4</label>
-                    <input type="text" id="m4_1" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>m5</label>
-                    <input type="text" id="m5_1" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>m6</label>
-                    <input type="text" id="m6_1" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>c</label>
-                    <input type="text" id="c_1" placeholder="c" disabled="disabled">
-                </div>
+                <button onclick="set_robot_gripper_data()">Старт</button>
             </div>
         </div>
-        <div class="control">
-            <div class="input-box">
-                <label>N</label>
-                <input type="text" id="N_control_1" placeholder="c">
+        <div class="thing" id="robot_vacuum">
+            <h1 style="text-align:center">Robot vacuum</h1>
+            <div class="sensors">
+                <div class="sensor">
+                    <div class="input-box">
+                        <label>t1</label>
+                        <input type="text" id="t1_2" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>t2</label>
+                        <input type="text" id="t2_2" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>t3</label>
+                        <input type="text" id="t3_2" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>t4</label>
+                        <input type="text" id="t4_2" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>t5</label>
+                        <input type="text" id="t5_2" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>t6</label>
+                        <input type="text" id="t6_2" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>n</label>
+                        <input type="text" id="n_2" placeholder="n" disabled="disabled">
+                    </div>
+                </div>
+                <div class="sensor">
+                    <div class="input-box">
+                        <label>l1</label>
+                        <input type="text" id="l1_2" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>l2</label>
+                        <input type="text" id="l2_2" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>l3</label>
+                        <input type="text" id="l3_2" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>l4</label>
+                        <input type="text" id="l4_2" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>l5</label>
+                        <input type="text" id="l5_2" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>l6</label>
+                        <input type="text" id="l6_2" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>s</label>
+                        <input type="text" id="s_2" placeholder="s" disabled="disabled">
+                    </div>
+                </div>
+                <div class="sensor">
+                    <div class="input-box">
+                        <label>m1</label>
+                        <input type="text" id="m1_2" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>m2</label>
+                        <input type="text" id="m2_2" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>m3</label>
+                        <input type="text" id="m3_2" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>m4</label>
+                        <input type="text" id="m4_2" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>m5</label>
+                        <input type="text" id="m5_2" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>m6</label>
+                        <input type="text" id="m6_2" placeholder="C" disabled="disabled">
+                    </div>
+                    <div class="input-box">
+                        <label>c</label>
+                        <input type="text" id="c_2" placeholder="c" disabled="disabled">
+                    </div>
+                </div>
             </div>
-            <div class="input-box">
-                <label>X</label>
-                <input type="text" id="X_1" placeholder="X">
+            <div class="control">
+                <div class="input-box">
+                    <label>N</label>
+                    <input type="text" id="N_control_2" placeholder="c">
+                </div>
+                <div class="input-box">
+                    <label>X</label>
+                    <input type="text" id="X_2" placeholder="X">
+                </div>
+                <div class="input-box">
+                    <label>Y</label>
+                    <input type="text" id="Y_2" placeholder="Y">
+                </div>
+                <div class="input-box">
+                    <label>T</label>
+                    <input type="text" id="T_2" placeholder="T">
+                </div>
+                <div class="input-box">
+                    <label>G</label>
+                    <input type="text" id="G_2" placeholder="G">
+                </div>
+                <button onclick="set_robot_gripper_data()">Старт</button>
             </div>
-            <div class="input-box">
-                <label>Y</label>
-                <input type="text" id="Y_1" placeholder="Y">
-            </div>
-            <div class="input-box">
-                <label>T</label>
-                <input type="text" id="T_1" placeholder="T">
-            </div>
-            <div class="input-box">
-                <label>G</label>
-                <input type="text" id="G_1" placeholder="G">
-            </div>
-            <button onclick="set_robot_gripper_data()">Старт</button>
         </div>
     </div>
-    <div class="thing" id="robot_vacuum">
-        <h1 style="text-align:center">Robot vacuum</h1>
-        <div class="sensors">
-            <div class="sensor">
+
+    <br>
+
+    <div class="thing" id="traffic_light">
+        <h1 style="text-align:center">Traffic light</h1>
+        <div id="Traffic_lights">
+            <div class="colors">
+                <div class="color_container">
+                    <div class="color" id="traffic_blue"></div>
+                </div>
+                <div class="color_container">
+                    <div class="color" id="traffic_red"></div>
+                </div>
+                <div class="color_container">
+                    <div class="color" id="traffic_yellow"></div>
+                </div>
+                <div class="color_container">
+                    <div class="color" id="traffic_green"></div>
+                </div>
+            </div>
+
+            <div class="connect_control">
+                <div class="input-box">
+                    <label>Функция подключения</label>
+                    <input type="text" id="traffic_lights_connect_URL" placeholder="URL" value="traffic_lights_connect">
+                </div>
+                <!-- Rounded switch -->
+                <label class="switch">
+                    <input type="checkbox" id="traffic_lights_connect">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        <div id="Samrt_camera">
+            <div class="camera" id="camera_doce">
                 <div class="input-box">
                     <label>t1</label>
-                    <input type="text" id="t1_2" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>t2</label>
-                    <input type="text" id="t2_2" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>t3</label>
-                    <input type="text" id="t3_2" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>t4</label>
-                    <input type="text" id="t4_2" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>t5</label>
-                    <input type="text" id="t5_2" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>t6</label>
-                    <input type="text" id="t6_2" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>n</label>
-                    <input type="text" id="n_2" placeholder="n" disabled="disabled">
+                    <input type="text" id="code" placeholder="code" disabled="disabled">
                 </div>
             </div>
-            <div class="sensor">
+
+
+            <div class="connect_control">
                 <div class="input-box">
-                    <label>l1</label>
-                    <input type="text" id="l1_2" placeholder="C" disabled="disabled">
+                    <label>Функция подключения</label>
+                    <input type="text" id="smart_camera_connect_URL" placeholder="URL" value="smart_camera_connect">
                 </div>
-                <div class="input-box">
-                    <label>l2</label>
-                    <input type="text" id="l2_2" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>l3</label>
-                    <input type="text" id="l3_2" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>l4</label>
-                    <input type="text" id="l4_2" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>l5</label>
-                    <input type="text" id="l5_2" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>l6</label>
-                    <input type="text" id="l6_2" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>s</label>
-                    <input type="text" id="s_2" placeholder="s" disabled="disabled">
-                </div>
+                <!-- Rounded switch -->
+                <label class="switch">
+                    <input type="checkbox" id="smart_camera_connect">
+                    <span class="slider round"></span>
+                </label>
             </div>
-            <div class="sensor">
-                <div class="input-box">
-                    <label>m1</label>
-                    <input type="text" id="m1_2" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>m2</label>
-                    <input type="text" id="m2_2" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>m3</label>
-                    <input type="text" id="m3_2" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>m4</label>
-                    <input type="text" id="m4_2" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>m5</label>
-                    <input type="text" id="m5_2" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>m6</label>
-                    <input type="text" id="m6_2" placeholder="C" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>c</label>
-                    <input type="text" id="c_2" placeholder="c" disabled="disabled">
-                </div>
-            </div>
-        </div>
-        <div class="control">
-            <div class="input-box">
-                <label>N</label>
-                <input type="text" id="N_control_2" placeholder="c">
-            </div>
-            <div class="input-box">
-                <label>X</label>
-                <input type="text" id="X_2" placeholder="X">
-            </div>
-            <div class="input-box">
-                <label>Y</label>
-                <input type="text" id="Y_2" placeholder="Y">
-            </div>
-            <div class="input-box">
-                <label>T</label>
-                <input type="text" id="T_2" placeholder="T">
-            </div>
-            <div class="input-box">
-                <label>G</label>
-                <input type="text" id="G_2" placeholder="G">
-            </div>
-            <button onclick="set_robot_gripper_data()">Старт</button>
+
         </div>
     </div>
-</div>
 
-<br>
+    <div class="thing" id="lights_camera">
 
-<div class="thing" id="traffic_light">
-    <h1 style="text-align:center">Traffic light</h1>
-</div>
+    </div>
 
-<br>
+    <br>
 
-<div class="thing" id="barcode_scanner">
-    <h1 style="text-align:center">Barcode scanner</h1>
-</div>
+    <div class="thing" id="barcode_scanner">
+        <h1 style="text-align:center">Barcode scanner</h1>
+    </div>
 
-<br>
+    <br>
 
-<div class="thing" id="control_panel">
-    <h1 style="text-align:center">Control panel</h1>
-</div>
+    <div class="thing" id="control_panel">
+        <h1 style="text-align:center">Control panel</h1>
+    </div>
 </body>
+
 </html>
