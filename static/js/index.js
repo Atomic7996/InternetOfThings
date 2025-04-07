@@ -107,21 +107,20 @@ function get_data_traffic_lights() {
     });
 }
 
-function get_data_barcode_scanner() {
-    $.ajax({
-        type: 'GET',
-        url: '/connect_scanner',
-        dataType: 'json',
-        contentType: 'application/json',
-        data: {},
-        success: function (response) {
-            document.getElementById("lastCode_4").value = response["lastCode"]
-            document.getElementById("scanStatus_4").value = response["isScanning"]
-        }
-    });
-}
+//function get_data_barcode_scanner() {
+//    $.ajax({
+//        type: 'GET',
+//        url: '/connect_scanner',
+//        dataType: 'json',
+//        contentType: 'application/json',
+//        data: {},
+//        success: function (response) {
+//            document.getElementById("lastCode_4").value = response["lastCode"]
+//            document.getElementById("scanStatus_4").value = response["isScanning"]
+//        }
+//    });
+//}
 
-// ПАНЕЛЬ УПРАВЛЕНИЯ (ID 5)
 function get_data_control_panel() {
     $.ajax({
         type: 'GET',

@@ -4,11 +4,11 @@ import devices as devices
 
 app = Flask(__name__)
 
-robotGripper = devices.RobotGripper("GripperRobot")
-robotVacuum = devices.RobotVacuum("VacuumRobot")
-trafficlight = devices.TrafficLight("Traffic light")
-scanner = devices.BarcodeScanner("Scanner")
-panel = devices.ControlPanel("Control panel")
+robotGripper = devices.RobotGripper("Gripper Robot")
+robotVacuum = devices.RobotVacuum("Vacuum Robot")
+trafficLight = devices.TrafficLight("Traffic light")
+barcodeScanner = devices.BarcodeScanner("Scanner")
+controlPanel = devices.ControlPanel("Control panel")
 
 
 @app.route("/robot_gripper_connect")
@@ -21,20 +21,19 @@ def robotVacuumConnect():
     return robotVacuum.connect()
 
 
-# Пример на Flask
 @app.route('/connect_trafficlight')
 def connect_trafficlight():
-    return trafficlight.connect()
+    return trafficLight.connect()
 
 
 @app.route('/connect_scanner')
 def connect_scanner():
-    return scanner.connect()
+    return barcodeScanner.connect()
 
 
 @app.route('/connect_panel')
 def connect_panel():
-    return panel.connect()
+    return controlPanel.connect()
 
 
 @app.route("/")
