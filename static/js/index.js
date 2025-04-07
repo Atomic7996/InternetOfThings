@@ -74,7 +74,7 @@ function get_data_robot_vacuum() {
 function connect_traffic_lights() {
     $.ajax({
         type: 'GET',
-        url: document.getElementById("URL_system").value + document.getElementById("traffic_lights_connect_URL").value,
+        url: '/connect_trafficlight',
         dataType: 'json',
         contentType: 'application/json',
         data: {},
@@ -111,7 +111,7 @@ function connect_traffic_lights() {
 function get_data_barcode_scanner() {
     $.ajax({
         type: 'GET',
-        url: '/connect/scanner',
+        url: '/connect_scanner',
         dataType: 'json',
         contentType: 'application/json',
         data: {},
@@ -126,7 +126,7 @@ function get_data_barcode_scanner() {
 function get_data_control_panel() {
     $.ajax({
         type: 'GET',
-        url: '/connect/panel',
+        url: '/connect_panel',
         dataType: 'json',
         contentType: 'application/json',
         data: {},

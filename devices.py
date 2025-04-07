@@ -168,27 +168,26 @@ class RobotVacuum(Robot):
 
 
 class TrafficLight(Device):
-    def __init__(self, name):
-        super().__init__(name)
-        self.blueLamp = 0
-        self.redLamp = 0
-        self.yellowLamp = 0
-        self.greenLamp = 0
-
-    def emulate(self):
-        self.blueLamp = random.randint(0, 1)
-        self.redLamp = random.randint(0, 1)
-        self.yellowLamp = random.randint(0, 1)
-        self.greenLamp = random.randint(0, 1)
+    def __init__(self):
+        self.L1 = 0
+        self.L2 = 0
+        self.L3 = 0
+        self.L4 = 0
 
     def connect(self):
-        self.emulate()
         return json.dumps({
-            'blueLamp': self.blueLamp,
-            'redLamp': self.redLamp,
-            'yellowLamp': self.yellowLamp,
-            'greenLamp': self.greenLamp
+            'L1': self.L1,
+            'L2': self.L2,
+            'L3': self.L3,
+            'L4': self.L4,
         })
+
+    def set_properties(self, request):
+        self.L1 = request.args.get('L1', '')
+        self.L2 = request.args.get('L2', '')
+        self.L3 = request.args.get('L3', '')
+        self.L4 = request.args.get('L4', '')
+        return {}
 
 class BarcodeScanner(Device):
     def __init__(self, name):
