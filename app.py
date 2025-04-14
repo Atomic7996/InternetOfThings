@@ -36,6 +36,22 @@ def connect_panel():
     return controlPanel.connect()
 
 
+# Control endpoints
+@app.route('/set_trafficlight', methods=['POST'])
+def set_trafficlight():
+    return trafficLight.set_properties(request)
+
+
+@app.route('/set_scanner', methods=['POST'])
+def set_scanner():
+    return barcodeScanner.set_properties(request)
+
+
+@app.route('/set_panel', methods=['POST'])
+def set_panel():
+    return controlPanel.set_properties(request)
+
+
 @app.route("/")
 def startApp():
     return render_template('index.html')

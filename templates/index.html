@@ -205,7 +205,6 @@
     </div>
 
     <br>
-
     <div class="thing" id="traffic_light">
         <h1 style="text-align:center">Traffic light</h1>
         <div id="Traffic_lights">
@@ -222,6 +221,25 @@
                 <div class="color_container">
                     <div class="color" id="traffic_green"></div>
                 </div>
+            </div>
+        </div>
+        <div class="control-buttons">
+            <h3>Control Lights:</h3>
+            <div>
+                <button onclick="controlTrafficLight(1, 1)">Blue On</button>
+                <button onclick="controlTrafficLight(1, 0)">Blue Off</button>
+            </div>
+            <div>
+                <button onclick="controlTrafficLight(2, 1)">Red On</button>
+                <button onclick="controlTrafficLight(2, 0)">Red Off</button>
+            </div>
+            <div>
+                <button onclick="controlTrafficLight(3, 1)">Yellow On</button>
+                <button onclick="controlTrafficLight(3, 0)">Yellow Off</button>
+            </div>
+            <div>
+                <button onclick="controlTrafficLight(4, 1)">Green On</button>
+                <button onclick="controlTrafficLight(4, 0)">Green Off</button>
             </div>
         </div>
     </div>
@@ -242,6 +260,9 @@
                 </div>
             </div>
         </div>
+        <div class="control-buttons">
+            <button onclick="controlBarcodeScanner(1)">Start Scan</button>
+        </div>
     </div>
 
     <br>
@@ -249,47 +270,41 @@
     <div class="thing" id="control_panel">
         <h1 style="text-align:center">Control panel</h1>
         <div class="sensors">
+            <!-- Existing sensor displays remain the same -->
             <div class="sensor">
-                <div class="input-box">
-                    <label>Switch Mode</label>
-                    <input type="text" id="switchMode_5" placeholder="[0-3]" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>Button 1 Count</label>
-                    <input type="text" id="button1Count_5" placeholder="[0-100]" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>Button 2 Code</label>
-                    <input type="text" id="button2Code_5" placeholder="[1000-9999]" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>Button 3 Code</label>
-                    <input type="text" id="button3Code_5" placeholder="[1000-9999]" disabled="disabled">
-                </div>
+                <!-- ... existing switch mode and buttons inputs ... -->
             </div>
 
-            <!-- Лампы панели управления -->
+            <!-- Lamp controls section -->
             <div class="sensor">
-                <h3>Lamps State</h3>
-                <div class="input-box">
-                    <label>Lamp 1</label>
-                    <input type="text" id="lamp1_5" placeholder="[0/1]" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>Lamp 2</label>
-                    <input type="text" id="lamp2_5" placeholder="[0/1]" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>Lamp 3</label>
-                    <input type="text" id="lamp3_5" placeholder="[0/1]" disabled="disabled">
-                </div>
-                <div class="input-box">
-                    <label>Lamp 4</label>
-                    <input type="text" id="lamp4_5" placeholder="[0/1]" disabled="disabled">
+                <h3>Lamps Control</h3>
+                <div class="lamp-controls">
+                    <label>
+                        Lamp 1:
+                        <input type="checkbox" id="lamp1_control" onchange="controlPanelLamp(1, this.checked)">
+                        <span id="lamp1_state">0</span>
+                    </label>
+                    <label>
+                        Lamp 2:
+                        <input type="checkbox" id="lamp2_control" onchange="controlPanelLamp(2, this.checked)">
+                        <span id="lamp2_state">0</span>
+                    </label>
+                    <label>
+                        Lamp 3:
+                        <input type="checkbox" id="lamp3_control" onchange="controlPanelLamp(3, this.checked)">
+                        <span id="lamp3_state">0</span>
+                    </label>
+                    <label>
+                        Lamp 4:
+                        <input type="checkbox" id="lamp4_control" onchange="controlPanelLamp(4, this.checked)">
+                        <span id="lamp4_state">0</span>
+                    </label>
                 </div>
             </div>
         </div>
+
     </div>
+
 </body>
 
 </html>

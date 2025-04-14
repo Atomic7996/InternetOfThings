@@ -140,3 +140,94 @@ function get_data_control_panel() {
         }
     });
 }
+
+// Traffic Light Control
+function control_traffic_light(lightNum, state) {
+    $.ajax({
+        type: 'POST',
+        url: '/set_trafficlight',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({ ['L' + lightNum]: state }),
+        success: function (response) {
+            console.log('Traffic light control response:', response);
+        }
+    });
+}
+
+// Barcode Scanner Control
+function control_barcode_scanner(command) {
+    $.ajax({
+        type: 'POST',
+        url: '/set_scanner',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({ 'scanCommand': command }),
+        success: function (response) {
+            console.log('Barcode scanner control response:', response);
+        }
+    });
+}
+
+// Control Panel Lamp Control
+function control_panel_lamp(lampNum, state) {
+    $.ajax({
+        type: 'POST',
+        url: '/set_panel',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({ ['lamp' + lampNum]: state }),
+        success: function (response) {
+            console.log('Control panel lamp control response:', response);
+        }
+    });
+}
+
+// Uncomment and update the barcode scanner data function
+function get_data_barcode_scanner() {
+    $.ajax({
+        type: 'GET',
+        url: '/connect_scanner',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: {},
+        success: function (response) {
+            document.getElementById("lastCode_4").value = response["lastCode"]
+            document.getElementById("scanStatus_4").value = response["isScanning"]
+
+            // Add visual feedback for scanning status
+            const scanStatusElement = document.getElementById("scanStatus_4");
+            if (response["isScanning"] == 1) {
+                scanStatusElement.style.backgroundColor = 'green';
+            } else {
+                scanStatusElement.style.backgroundColor = 'red';
+            }
+        }
+    });
+}
+
+// Add event listeners for control elements
+document.addEventListener('DOMContentLoaded', function () {
+    // Traffic light controls
+    document.querySelectorAll('.traffic-light-control').forEach(button => {
+        button.addEventListener('click', function () {
+            const lightNum = this.dataset.light;
+            const state = this.dataset.state;
+            control_traffic_light(lightNum, state);
+        });
+    });
+
+    // Barcode scanner controls
+    document.getElementById('startScanBtn').addEventListener('click', function () {
+        control_barcode_scanner(1);
+    });
+
+    // Control panel lamp switches
+    document.querySelectorAll('.lamp-switch').forEach(switchElement => {
+        switchElement.addEventListener('change', function () {
+            const lampNum = this.dataset.lamp;
+            const state = this.checked ? 1 : 0;
+            control_panel_lamp(lampNum, state);
+        });
+    });
+});

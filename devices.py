@@ -170,7 +170,6 @@ class RobotVacuum(Robot):
 class TrafficLight(Device):
     def __init__(self, name):
         super().__init__(name)
-
         self.L1 = 0
         self.L2 = 0
         self.L3 = 0
@@ -178,7 +177,6 @@ class TrafficLight(Device):
 
     def connect(self):
         self.emulate()
-
         return json.dumps({
             'L1': self.L1,
             'L2': self.L2,
@@ -187,35 +185,52 @@ class TrafficLight(Device):
         })
 
     def emulate(self):
-        self.L1 = random.randint(0, 1)
-        self.L2 = random.randint(0, 1)
-        self.L3 = random.randint(0, 1)
-        self.L4 = random.randint(0, 1)
+        # Keep current values unless they haven't been set
+        if not hasattr(self, '_initialized'):
+            self.L1 = random.randint(0, 1)
+            self.L2 = random.randint(0, 1)
+            self.L3 = random.randint(0, 1)
+            self.L4 = random.randint(0, 1)
+            self._initialized = True
 
     def set_properties(self, request):
-        self.L1 = request.args.get('L1', '')
-        self.L2 = request.args.get('L2', '')
-        self.L3 = request.args.get('L3', '')
-        self.L4 = request.args.get('L4', '')
-        return {}
+        if 'L1' in request.args:
+            self.L1 = int(request.args.get('L1'))
+        if 'L2' in request.args:
+            self.L2 = int(request.args.get('L2'))
+        if 'L3' in request.args:
+            self.L3 = int(request.args.get('L3'))
+        if 'L4' in request.args:
+            self.L4 = int(request.args.get('L4'))
+        return {'status': 'success'}
+
 
 class BarcodeScanner(Device):
     def __init__(self, name):
         super().__init__(name)
-        self.lastCode = 0
+        self.lastCode = "0"
         self.isScanning = 0
+        self.scanCommand = 0  # 0 - idle, 1 - start scan
 
     def emulate(self):
-        self.lastCode = str(random.randint(10**11, 10**12-1))
-        self.isScanning = random.choice([0, 1])
+        if self.scanCommand == 1:
+            self.lastCode = str(random.randint(10**11, 10**12-1))
+            self.isScanning = 1
+            self.scanCommand = 0  # Reset command after processing
+        else:
+            self.isScanning = 0
 
     def connect(self):
         self.emulate()
-
         return json.dumps({
             'lastCode': self.lastCode,
             'isScanning': self.isScanning
         })
+
+    def set_properties(self, request):
+        if 'scanCommand' in request.args:
+            self.scanCommand = int(request.args.get('scanCommand'))
+        return {'status': 'success'}
 
 
 class ControlPanel(Device):
@@ -226,13 +241,20 @@ class ControlPanel(Device):
         self.button2Code = 0
         self.button3Code = 0
         self.lampStates = [0]*4
+        self.lampCommands = [0]*4  # To receive commands from UI
 
     def emulate(self):
+        # Update lamp states based on commands
+        for i in range(4):
+            if self.lampCommands[i] != -1:  # -1 means no command
+                self.lampStates[i] = self.lampCommands[i]
+                self.lampCommands[i] = -1  # Reset command after processing
+
+        # Randomize other properties
         self.switchMode = random.randint(0, 3)
         self.button1Count = random.randint(0, 100)
         self.button2Code = random.randint(1000, 9999)
         self.button3Code = random.randint(1000, 9999)
-        self.lampStates = [random.randint(0,1) for _ in range(4)]
 
     def connect(self):
         self.emulate()
@@ -243,3 +265,10 @@ class ControlPanel(Device):
             'button3Code': self.button3Code,
             'lamps': self.lampStates
         })
+
+    def set_properties(self, request):
+        for i in range(4):
+            lamp_key = f'lamp{i+1}'
+            if lamp_key in request.args:
+                self.lampCommands[i] = int(request.args.get(lamp_key))
+        return {'status': 'success'}
