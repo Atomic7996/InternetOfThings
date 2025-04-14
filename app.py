@@ -36,20 +36,31 @@ def connect_panel():
     return controlPanel.connect()
 
 
-# Control endpoints
-@app.route('/set_trafficlight', methods=['POST'])
+# Traffic Light Control
+@app.route('/set_trafficlight')
 def set_trafficlight():
-    return trafficLight.set_properties(request)
+    light_num = request.args.get('light', type=int)
+    state = request.args.get('state', type=int)
+    if light_num and state is not None:
+        setattr(trafficLight, f'L{light_num}', state)
+    return jsonify({'status': 'success'})
 
-
-@app.route('/set_scanner', methods=['POST'])
+# Barcode Scanner Control
+@app.route('/set_scanner')
 def set_scanner():
-    return barcodeScanner.set_properties(request)
+    command = request.args.get('command', type=int)
+    if command is not None:
+        barcodeScanner.scanCommand = command
+    return jsonify({'status': 'success'})
 
-
-@app.route('/set_panel', methods=['POST'])
+# Control Panel Control
+@app.route('/set_panel')
 def set_panel():
-    return controlPanel.set_properties(request)
+    lamp_num = request.args.get('lamp', type=int)
+    state = request.args.get('state', type=int)
+    if lamp_num and state is not None:
+        controlPanel.lampCommands[lamp_num-1] = state
+    return jsonify({'status': 'success'})
 
 
 @app.route("/")

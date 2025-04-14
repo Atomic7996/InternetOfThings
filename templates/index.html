@@ -244,8 +244,6 @@
         </div>
     </div>
 
-    <br>
-
     <div class="thing" id="barcode_scanner">
         <h1 style="text-align:center">Barcode scanner</h1>
         <div class="sensors">
@@ -265,17 +263,28 @@
         </div>
     </div>
 
-    <br>
-
     <div class="thing" id="control_panel">
         <h1 style="text-align:center">Control panel</h1>
         <div class="sensors">
-            <!-- Existing sensor displays remain the same -->
             <div class="sensor">
-                <!-- ... existing switch mode and buttons inputs ... -->
+                <div class="input-box">
+                    <label>Switch Mode</label>
+                    <input type="text" id="switchMode_5" placeholder="[0-3]" disabled="disabled">
+                </div>
+                <div class="input-box">
+                    <label>Button 1 Count</label>
+                    <input type="text" id="button1Count_5" placeholder="[0-100]" disabled="disabled">
+                </div>
+                <div class="input-box">
+                    <label>Button 2 Code</label>
+                    <input type="text" id="button2Code_5" placeholder="[1000-9999]" disabled="disabled">
+                </div>
+                <div class="input-box">
+                    <label>Button 3 Code</label>
+                    <input type="text" id="button3Code_5" placeholder="[1000-9999]" disabled="disabled">
+                </div>
             </div>
 
-            <!-- Lamp controls section -->
             <div class="sensor">
                 <h3>Lamps Control</h3>
                 <div class="lamp-controls">
@@ -302,7 +311,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
 </body>

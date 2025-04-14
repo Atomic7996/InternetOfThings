@@ -141,93 +141,60 @@ function get_data_control_panel() {
     });
 }
 
-// Traffic Light Control
-function control_traffic_light(lightNum, state) {
+// Traffic Light Control через GET
+function controlTrafficLight(lightNum, state) {
     $.ajax({
-        type: 'POST',
+        type: 'GET',
         url: '/set_trafficlight',
-        dataType: 'json',
-        contentType: 'application/json',
-        data: JSON.stringify({ ['L' + lightNum]: state }),
+        data: {
+            light: lightNum,
+            state: state
+        },
         success: function (response) {
             console.log('Traffic light control response:', response);
+            // Обновляем состояние сразу, не дожидаясь следующего интервала
+            updateTrafficLight(lightNum, state);
         }
     });
 }
 
-// Barcode Scanner Control
-function control_barcode_scanner(command) {
+// Barcode Scanner Control через GET
+function controlBarcodeScanner(command) {
     $.ajax({
-        type: 'POST',
+        type: 'GET',
         url: '/set_scanner',
-        dataType: 'json',
-        contentType: 'application/json',
-        data: JSON.stringify({ 'scanCommand': command }),
+        data: {
+            command: command
+        },
         success: function (response) {
             console.log('Barcode scanner control response:', response);
         }
     });
 }
 
-// Control Panel Lamp Control
-function control_panel_lamp(lampNum, state) {
-    $.ajax({
-        type: 'POST',
-        url: '/set_panel',
-        dataType: 'json',
-        contentType: 'application/json',
-        data: JSON.stringify({ ['lamp' + lampNum]: state }),
-        success: function (response) {
-            console.log('Control panel lamp control response:', response);
-        }
-    });
-}
-
-// Uncomment and update the barcode scanner data function
-function get_data_barcode_scanner() {
+// Control Panel Lamp Control через GET
+function controlPanelLamp(lampNum, state) {
     $.ajax({
         type: 'GET',
-        url: '/connect_scanner',
-        dataType: 'json',
-        contentType: 'application/json',
-        data: {},
+        url: '/set_panel',
+        data: {
+            lamp: lampNum,
+            state: state
+        },
         success: function (response) {
-            document.getElementById("lastCode_4").value = response["lastCode"]
-            document.getElementById("scanStatus_4").value = response["isScanning"]
-
-            // Add visual feedback for scanning status
-            const scanStatusElement = document.getElementById("scanStatus_4");
-            if (response["isScanning"] == 1) {
-                scanStatusElement.style.backgroundColor = 'green';
-            } else {
-                scanStatusElement.style.backgroundColor = 'red';
-            }
+            console.log('Control panel response:', response);
+            // Обновляем состояние сразу
+            document.getElementById(`lamp${lampNum}_state`).textContent = state ? '1' : '0';
+            document.getElementById(`lamp${lampNum}_5`).value = state ? '1' : '0';
         }
     });
 }
 
-// Add event listeners for control elements
-document.addEventListener('DOMContentLoaded', function () {
-    // Traffic light controls
-    document.querySelectorAll('.traffic-light-control').forEach(button => {
-        button.addEventListener('click', function () {
-            const lightNum = this.dataset.light;
-            const state = this.dataset.state;
-            control_traffic_light(lightNum, state);
-        });
-    });
-
-    // Barcode scanner controls
-    document.getElementById('startScanBtn').addEventListener('click', function () {
-        control_barcode_scanner(1);
-    });
-
-    // Control panel lamp switches
-    document.querySelectorAll('.lamp-switch').forEach(switchElement => {
-        switchElement.addEventListener('change', function () {
-            const lampNum = this.dataset.lamp;
-            const state = this.checked ? 1 : 0;
-            control_panel_lamp(lampNum, state);
-        });
-    });
-});
+// Вспомогательная функция для обновления светофора
+function updateTrafficLight(lightNum, state) {
+    const colors = ['blue', 'red', 'yellow', 'green'];
+    const element = document.getElementById(`traffic_${colors[lightNum - 1]}`);
+    if (element) {
+        element.style.backgroundColor = state ? colors[lightNum - 1] : 'black';
+    }
+}
